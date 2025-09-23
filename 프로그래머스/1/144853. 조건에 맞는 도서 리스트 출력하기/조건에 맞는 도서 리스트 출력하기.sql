@@ -1,0 +1,9 @@
+-- 코드를 입력하세요
+SELECT BOOK_ID, DATE_FORMAT(PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM BOOK
+WHERE PUBLISHED_DATE BETWEEN '2021-01-01' AND '2021-12-31'
+    AND CATEGORY = '인문';
+
+-- SELECT : 도서ID, 출판일
+-- WHERE : 2021년에 출판된 '인문' 카테고리에 속하는 도서 리스트
+-- FROM : BOOK
