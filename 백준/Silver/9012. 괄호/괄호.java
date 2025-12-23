@@ -1,40 +1,37 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class Main {
-    public static void main(String[] args) {
-        // T개의 테스트 데이터로 주어진다.
-        // count를 세는 변수를 하나 생성한다. 초기화
-        // "("이면 count++, ")"이면 count--
-        // 끝까지 다 돌았을 때 count가 0이면 "YES" 출력, 그 외 "NO" 출력
-        // T만큼 반복
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine().trim());
 
-        int count = 0;
-        for(int i = 0; i < n; i++) {
-            String str = sc.next();
-            boolean invalid = false;
-            count = 0;
-            for(Character c : str.toCharArray()) {
-                if(c == '(') {
-                    count++;
-                }else if(c == ')') {
-                    count--;
-                    if(count < 0) {
-                        invalid = true;
+        StringBuilder sb = new StringBuilder();
+
+        for (int t = 0; t < T; t++) {
+            String s = br.readLine().trim();
+            Stack<Character> st = new Stack<>();
+            boolean valid = true;
+
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+
+                if (c == '(') {
+                    st.push(c);
+                } else { // c == ')'
+                    if (st.isEmpty()) {
+                        valid = false;
                         break;
                     }
+                    st.pop();
                 }
             }
 
-            if(!invalid && count == 0) {
-                System.out.println("YES");
-            }else {
-                System.out.println("NO");
-            }
+            if (valid && st.isEmpty()) sb.append("YES\n");
+            else sb.append("NO\n");
         }
 
-
+        System.out.print(sb.toString());
     }
 }
